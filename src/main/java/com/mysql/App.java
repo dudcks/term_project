@@ -19,8 +19,9 @@ public class App {
                 System.out.println("4. 동아리 추가\t 5.동아리 찾기\t6.동아리 삭제\t");
                 System.out.println("7. 교수 추가\t 8.교수 찾기\t9.교수 삭제");
                 System.out.println("10. 활동 추가\t 11.활동 찾기\t12.활동 삭제\n");
+                //-------
 
-                System.out.println("15. 동아리 가입\t 16.동아리 담당교수 입력\t17.동아리 회장 입력");
+                System.out.println("13. 동아리 가입\t 16.동아리 담당교수 입력\t17.동아리 회장 입력");
                 System.out.println("18. 활동 참여\t 19.활동 회장 입력\t\n");
                 
                 
@@ -67,7 +68,10 @@ public class App {
                         break;
                     case 12:
                         ActivityOperations.DeleteActivity(con, scanner);
-                        break;    
+                        break;   
+                    case 13:
+                        ClubOperations.JoinClub(con, scanner);
+                        break; 
                     case 0:
                         System.out.println("프로그램을 종료합니다.");
                         con.close();

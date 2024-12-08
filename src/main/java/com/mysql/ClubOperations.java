@@ -91,4 +91,52 @@ public class ClubOperations {
         }
         System.out.println();
     }
+
+    public static void JoinClub(Connection con, Scanner scanner) {
+        System.out.println("1.입력\t2.취소");
+        int menu = scanner.nextInt();
+        scanner.nextLine();
+    
+        if (menu == 1) {
+            try {
+                System.out.print("학번: ");
+                int sid = scanner.nextInt();
+                scanner.nextLine(); 
+        
+                System.out.print("동아리 이름: ");
+                String clubName = scanner.nextLine();
+    
+                // 동아리 이름으로 club_id 조회
+                String findClubQuery = "SELECT club_id FROM Club WHERE c_name = ?";
+                try (PreparedStatement findClubStmt = con.prepareStatement(findClubQuery)) {
+                    findClubStmt.setString(1, clubName);
+    
+                    try (ResultSet rs = findClubStmt.executeQuery()) {
+                        if (rs.next()) {
+                            int clubId = rs.getInt("club_id");
+    
+                            String insertQuery = "INSERT INTO Student_Club (student_id, club_id) VALUES (?, ?)";
+                            try (PreparedStatement insertStmt = con.prepareStatement(insertQuery)) {
+                                insertStmt.setInt(1, sid);
+                                insertStmt.setInt(2, clubId);
+    
+                                int insertCount = insertStmt.executeUpdate();
+                                if (insertCount > 0) {
+                                    System.out.println("동아리에 성공적으로 가입되었습니다.");
+                                }
+                            }
+                        } else {
+                            System.out.println("입력한 동아리 이름이 존재하지 않습니다.");
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("데이터 처리 중 오류 발생: " + e.getMessage());
+            }
+        } else {
+            System.out.println("동아리 가입이 취소되었습니다.");
+        }
+        System.out.println();
+    }
+    
 }
