@@ -1,5 +1,5 @@
 -- 데이터베이스 생성
-CREATE DATABASE UniversityDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE UniversityDB;
 
 -- 생성한 데이터베이스 사용
 USE UniversityDB;
