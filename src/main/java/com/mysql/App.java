@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in); // Scanner는 프로그램 전체에서 1번만 생성
+        Scanner scanner = new Scanner(System.in); 
         boolean condition = true;
         try {
             // MySQL 연결
@@ -16,16 +16,16 @@ public class App {
             while (condition) {
                 System.out.println("메뉴");
                 System.out.println("0. 종료\t 1.학생 추가\t 2.학생 찾기\t3.학생 삭제");
-                System.out.println("6. 동아리 추가\t 7.동아리 찾기\t8.동아리 삭제\t9.");
-                System.out.println("8. 교수 추가\t 9.교수 찾기\t10.교수 삭제");
-                System.out.println("11. 활동 추가\t 12.활동 찾기\t13.활동 삭제\n");
+                System.out.println("4. 동아리 추가\t 5.동아리 찾기\t6.동아리 삭제\t");
+                System.out.println("7. 교수 추가\t 8.교수 찾기\t9.교수 삭제");
+                System.out.println("10. 활동 추가\t 11.활동 찾기\t12.활동 삭제\n");
 
-                System.out.println("14. 동아리 가입\t 15.동아리 담당교수 입력\t16.동아리 회장 입력");
-                System.out.println("17. 활동 참여\t 18.활동 회장 입력\t\n");
+                System.out.println("15. 동아리 가입\t 16.동아리 담당교수 입력\t17.동아리 회장 입력");
+                System.out.println("18. 활동 참여\t 19.활동 회장 입력\t\n");
                 
                 
-                System.out.println("19. 동아리 탈퇴\t20.활동 탈퇴\t21.동아리 담당교수 변경\t22.동아리 회장 변경");
-                System.out.println("23. 동아리 소속 학생 정보\t 24.활동 참여 학생 정보");
+                System.out.println("20. 동아리 탈퇴\t21.활동 탈퇴\t22.동아리 담당교수 변경\t23.동아리 회장 변경");
+                System.out.println("24. 동아리 소속 학생 정보\t 25.활동 참여 학생 정보");
 
 
                 int menu = scanner.nextInt();
@@ -49,7 +49,25 @@ public class App {
                         break;
                     case 6:
                         ClubOperations.DeleteClub(con, scanner);
+                        break;           
+                    case 7:
+                        ProfessorOperations.InsertProfessor(con, scanner);
                         break;
+                    case 8:
+                        ProfessorOperations.FindProfessor(con, scanner);
+                        break;
+                    case 9:
+                        ProfessorOperations.DeleteProfessor(con, scanner);
+                        break;
+                    case 10:
+                        ActivityOperations.InsertActivity(con, scanner);
+                        break;
+                    case 11:
+                        ActivityOperations.FindActivity(con, scanner);
+                        break;
+                    case 12:
+                        ActivityOperations.DeleteActivity(con, scanner);
+                        break;    
                     case 0:
                         System.out.println("프로그램을 종료합니다.");
                         con.close();
