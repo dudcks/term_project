@@ -31,12 +31,14 @@ public class StudentOperations {
         } catch (SQLException e) {
             System.out.println("데이터 삽입 중 오류 발생: " + e.getMessage());
         }
+        System.out.println();
     }
 
     public static void FindStudent(Connection con, Scanner scanner) {
         System.out.println("1.학번으로 찾기\t2.이름으로 찾기\t3.취소");
         int menu = scanner.nextInt();
         scanner.nextLine();
+        
 
         try {
             switch (menu) {
@@ -88,6 +90,7 @@ public class StudentOperations {
         } catch (SQLException e) {
             System.out.println("데이터 조회 중 오류 발생: " + e.getMessage());
         }
+        System.out.println();
     }
 
     public static void DeleteStudent(Connection con, Scanner scanner) {
@@ -118,5 +121,7 @@ public class StudentOperations {
         } else {
             System.out.println("학생 삭제가 취소되었습니다.");
         }
+        System.out.println();
     }
+    
 }
