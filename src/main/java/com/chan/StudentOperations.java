@@ -1,4 +1,4 @@
-package com.mysql;
+package com.chan;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -22,6 +22,7 @@ public class StudentOperations {
                 pstmt.setString(2, name);
                 pstmt.setString(3, b_date);
                 pstmt.setString(4, gender);
+                
 
                 int insertCount = pstmt.executeUpdate();
                 if (insertCount > 0) {

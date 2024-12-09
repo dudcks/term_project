@@ -1,4 +1,4 @@
-package com.mysql;
+package com.chan;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
