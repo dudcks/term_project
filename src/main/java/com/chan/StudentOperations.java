@@ -57,6 +57,7 @@ public class StudentOperations {
                             System.out.println("해당 학번의 학생 정보를 찾을 수 없습니다.");
                         } else {
                             do {
+                                System.out.println("학번  |  이름  |  생일  |  성별");
                                 System.out.println(rs.getInt("student_id") + " " + rs.getString("s_name") + " "
                                         + rs.getString("birth_date") + " " + rs.getString("gender"));
                             } while (rs.next());
@@ -76,6 +77,7 @@ public class StudentOperations {
                             System.out.println("해당 이름의 학생 정보를 찾을 수 없습니다.");
                         } else {
                             do {
+                                System.out.println("학번  |  이름  |  생일  |  성별");
                                 System.out.println(rs.getInt("student_id") + " " + rs.getString("s_name") + " "
                                         + rs.getString("birth_date") + " " + rs.getString("gender"));
                             } while (rs.next());

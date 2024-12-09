@@ -104,6 +104,7 @@ public class ActivityOperations {
                             System.out.println("해당 ID의 활동 정보를 찾을 수 없습니다.");
                         } else {
                             do {
+                                System.out.println("활동id  |  활동 이름  |  시작일  |  종료일");
                                 System.out.println(rs.getInt("activity_id") + " " + rs.getString("a_name") + " "
                                         + rs.getDate("start_date") + " " + rs.getDate("end_date"));
                             } while (rs.next());
@@ -123,6 +124,7 @@ public class ActivityOperations {
                             System.out.println("해당 이름의 활동 정보를 찾을 수 없습니다.");
                         } else {
                             do {
+                                System.out.println("활동id  |  활동 이름  |  시작일  |  종료일");
                                 System.out.println(rs.getInt("activity_id") + " " + rs.getString("a_name") + " "
                                         + rs.getDate("start_date") + " " + rs.getDate("end_date"));
                             } while (rs.next());

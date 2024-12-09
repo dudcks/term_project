@@ -50,6 +50,7 @@ public class ClubOperations {
                 if (!rs.next()) {
                     System.out.println("해당 동아리 정보를 찾을 수 없습니다.");
                 } else {
+                    System.out.println("id  |  이름  |  시작일  |  위치  ");
                     do {
                         System.out.println(rs.getInt("club_id") + " " + rs.getString("c_name") + " "
                                 + rs.getString("creation_date") + " " + rs.getString("location"));
@@ -276,7 +277,7 @@ public class ClubOperations {
     }
 
     public static void UpdateClubAdvisor(Connection con, Scanner scanner) {
-        System.out.println("1.담당 교수 변경\t2.취소");
+        System.out.println("1. 담당 교수 변경\t2. 취소");
         int menu = scanner.nextInt();
         scanner.nextLine();
 
@@ -290,35 +291,46 @@ public class ClubOperations {
                 String clubName = scanner.nextLine();
 
                 // 기존 정보 확인
-                String checkQuery = "SELECT club_id FROM Club WHERE advisor_id = ? AND c_name = ?";
+                String checkQuery = "SELECT club_id FROM Club WHERE c_name = ?";
                 try (PreparedStatement checkStmt = con.prepareStatement(checkQuery)) {
-                    checkStmt.setInt(1, oldProfessorId);
-                    checkStmt.setString(2, clubName);
+                    checkStmt.setString(1, clubName);
                     ResultSet rs = checkStmt.executeQuery();
 
                     if (rs.next()) {
                         int clubId = rs.getInt("club_id"); // 동아리 ID 가져오기
 
-                        // 새 교수 ID 입력
-                        System.out.print("새 교수 ID: ");
-                        int newProfessorId = scanner.nextInt();
-                        scanner.nextLine();
+                        // 교수-동아리 관계에서 기존 교수 ID 확인
+                        String checkAdvisorQuery = "SELECT professor_id FROM Professor_Club WHERE professor_id = ? AND club_id = ?";
+                        try (PreparedStatement advisorStmt = con.prepareStatement(checkAdvisorQuery)) {
+                            advisorStmt.setInt(1, oldProfessorId);
+                            advisorStmt.setInt(2, clubId);
+                            ResultSet advisorRs = advisorStmt.executeQuery();
 
-                        // 담당 교수 업데이트
-                        String updateQuery = "UPDATE Club SET advisor_id = ? WHERE club_id = ?";
-                        try (PreparedStatement updateStmt = con.prepareStatement(updateQuery)) {
-                            updateStmt.setInt(1, newProfessorId);
-                            updateStmt.setInt(2, clubId);
+                            if (advisorRs.next()) {
+                                // 새 교수 ID 입력
+                                System.out.print("새 교수 ID: ");
+                                int newProfessorId = scanner.nextInt();
+                                scanner.nextLine();
 
-                            int updateCount = updateStmt.executeUpdate();
-                            if (updateCount > 0) {
-                                System.out.println("담당 교수가 성공적으로 변경되었습니다.");
+                                // 교수-동아리 관계 업데이트
+                                String updateQuery = "UPDATE Professor_Club SET professor_id = ? WHERE club_id = ?";
+                                try (PreparedStatement updateStmt = con.prepareStatement(updateQuery)) {
+                                    updateStmt.setInt(1, newProfessorId);
+                                    updateStmt.setInt(2, clubId);
+
+                                    int updateCount = updateStmt.executeUpdate();
+                                    if (updateCount > 0) {
+                                        System.out.println("담당 교수가 성공적으로 변경되었습니다.");
+                                    } else {
+                                        System.out.println("담당 교수 변경에 실패하였습니다.");
+                                    }
+                                }
                             } else {
-                                System.out.println("담당 교수 변경에 실패하였습니다.");
+                                System.out.println("해당 동아리와 교수 정보가 존재하지 않습니다.");
                             }
                         }
                     } else {
-                        System.out.println("해당 동아리와 교수 정보가 존재하지 않습니다.");
+                        System.out.println("해당 동아리가 존재하지 않습니다.");
                     }
                 }
             } catch (SQLException e) {
@@ -329,6 +341,7 @@ public class ClubOperations {
         }
         System.out.println();
     }
+
 
     public static void UpdateClubPresident(Connection con, Scanner scanner) {
         System.out.println("1.회장 변경\t2.취소");

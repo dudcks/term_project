@@ -55,6 +55,7 @@ public class ProfessorOperations {
                         if (!rs.next()) {
                             System.out.println("해당 ID의 교수 정보를 찾을 수 없습니다.");
                         } else {
+                            System.out.println("교슈id  |  이름  |  학과");
                             do {
                                 System.out.println(rs.getInt("professor_id") + " " + rs.getString("p_name") + " "
                                         + rs.getString("department") );
