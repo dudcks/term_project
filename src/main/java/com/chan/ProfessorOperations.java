@@ -21,7 +21,7 @@ public class ProfessorOperations {
             try (PreparedStatement pstmt = con.prepareStatement(insertQuery)) {
                 pstmt.setInt(1,pid);
                 pstmt.setString(2, name);
-                pstmt.setString(4, department);
+                pstmt.setString(3, department);
 
                 int insertCount = pstmt.executeUpdate();
                 if (insertCount > 0) {
