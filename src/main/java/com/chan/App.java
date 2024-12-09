@@ -11,7 +11,7 @@ public class App {
             // MySQL 연결
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://192.168.56.102:4567/UniversityDB?useUnicode=true&characterEncoding=utf8",
-                    "goyoungchan", "330931cks");
+                    "goyoungchan", "test");
             System.out.println("MySQL 연결 완료!");
             while (condition) {
                 System.out.println("_______________________________________________________________________________________________________");
