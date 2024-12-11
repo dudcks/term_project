@@ -6,12 +6,18 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Scanner scanner = new Scanner(System.in, "UTF-8");
+        System.out.print("주소(포트 포함): ");
+        String ip = scanner.nextLine();
+        System.out.print("아이디: ");
+        String id = scanner.nextLine();
+        System.out.print("비밀번호: ");
+        String pwd = scanner.nextLine();
         boolean condition = true;
         try {
             // MySQL 연결
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://192.168.56.102:4567/UniversityDB?useUnicode=true&characterEncoding=utf8",
-                    "goyoungchan", "test");
+            Connection con = DriverManager.getConnection("jdbc:mysql://"+ip+"/UniversityDB?useUnicode=true&characterEncoding=utf8",
+                    id, pwd);
             System.out.println("MySQL 연결 완료!");
             while (condition) {
                 System.out.println("_______________________________________________________________________________________________________");
